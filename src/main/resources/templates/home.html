@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/scripts/getRole.js"></script>
+    <script></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.js">
+        // <!--integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
+        // <!--crossorigin="anonymous">-->
+    </script>
+    <!--<script>-->
+        <!--function getRole() {-->
+            <!--console.log("getRole function is invoked");-->
+            <!--$.ajax({-->
+                <!--type: "GET",-->
+                <!--url: '/users/api/getPrincipal',-->
+                <!--contentType: "application/json; charset=utf-8",-->
+                <!--success: function (user) {-->
+                    <!--console.log(user);-->
+                <!--},-->
+                <!--error: function (e) {-->
+                    <!--console.log("Error");-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
+    <!--</script>-->
+
+</head>
+<body class="w3-white">
+
+<th:block th:replace="_header :: _header"></th:block>
+<th:block th:replace="_menu :: _menu"></th:block>
+
+<div class="w3-container">
+    <h3>Home Page</h3>
+    <b>Application includes the following functions:</b>
+    <ul class="w3-ul">
+        <li style="width: 30%">View the list of users</li>
+        <li style="width: 30%">Create User</li>
+        <li style="width: 30%">Edit User</li>
+        <li style="width: 30%">Delete User</li>
+    </ul>
+</div>
+<th:block th:replace="_footer :: _footer"></th:block>
+
+</body>
+</html>

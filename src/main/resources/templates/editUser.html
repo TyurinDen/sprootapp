@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-light-grey">
+
+<th:block th:replace="_header :: _header"></th:block>
+<th:block th:replace="_menu :: _menu"></th:block>
+
+<div class="w3-container w3-white">
+    <h3>Edit user data</h3>
+    <span class="w3-tag w3-light-grey w3-round-medium w3-hover-amber"> User login: <th:block
+            th:text="${user.login}"></th:block></span>
+
+    <th:block th:if="${user}">
+        <form method="POST" action="/users/edit" class="w3-selection">
+            <input type="hidden" name="userId" th:field="*{user.id}" style="width: 30%"/>
+            <input type="hidden" name="login" th:field="*{user.login}" style="width: 30%"/>
+            <input type="password" name="password" placeholder="Password" th:field="*{user.password}" class="w3-input"
+                   style="width: 30%"/>
+
+            <th:block th:if="${user.roles.contains('ADMIN')}">
+                <select class="w3-select" name="role" style="width: 30%">
+                    <option value="" disabled>Choose user role</option>
+                    --%>
+                    <option value="USER">USER</option>
+                    <option value="ADMIN" selected>${user.roles}</option>
+                    --%>
+                    <option value="DBA">DBA</option>
+                </select>
+            </th:block>
+            <th:block th:if="${user.roles.contains('USER')}">
+                <select class="w3-select" name="role" style="width: 30%">
+                    <option value="" disabled>Choose user role</option>
+                    --%>
+                    <option value="USER" selected>${user.roles}</option>
+                    <option value="ADMIN">ADMIN</option>
+                    --%>
+                    <option value="DBA">DBA</option>
+                </select>
+            </th:block>
+            <th:block th:if="${user.roles.contains('DBA')}">
+                <select class="w3-select" name="role" style="width: 30%">
+                    <option value="" disabled>Choose user role</option>
+                    --%>
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                    --%>
+                    <option value="DBA" selected>${user.roles}</option>
+                </select>
+            </th:block>
+
+            <div class="w3-bar">
+                <button type="submit"
+                        class="w3-button w3-light-grey w3-round-medium w3-padding-small w3-margin-top w3-margin-bottom w3-hover-lime"
+                        onclick="location.href='/users/edit'">Submit
+                </button>
+                <button type="reset"
+                        class="w3-button w3-light-grey w3-round-medium w3-padding-small w3-margin-top w3-margin-bottom w3-hover-amber"
+                        onclick="location.href='/users/list'">Cancel
+                </button>
+            </div>
+        </form>
+    </th:block>
+</div>
+
+<th:block th:replace="_footer :: _footer"></th:block>
+
+</body>
+</html>

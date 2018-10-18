@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-white">
+
+<th:block th:replace="_header :: _header"></th:block>
+<th:block th:replace="_menu :: _menu"></th:block>
+
+<div class="w3-container">
+    <h5 class="w3-tag w3-white w3-text-red"><strong>ACCESS DENIED!</strong></h5><br>
+    <h6 class="w3-tag w3-white">Dear <strong th:text="${user}"></strong>, you are not authorized to access this page</h6>
+</div>
+<th:block th:replace="_footer :: _footer"></th:block>
+
+</body>
+</html>

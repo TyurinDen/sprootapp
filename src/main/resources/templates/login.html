@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login...</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body class="w3-white" onload='document.loginForm.login.focus();'>
+
+<th:block th:replace="_header :: _header"></th:block>
+<th:block th:replace="_menu :: _menu"></th:block>
+
+<div class="w3-container">
+    <th:block th:if="${param.error}">
+        <div>
+            <h6 class="w3-tag w3-amber">Invalid username or password or both!</h6>
+        </div>
+    </th:block>
+
+    <th:block th:if="${param.logout}">
+        <div>
+            <h6 class="w3-tag w3-light-green">You have been logged out successfully!</h6>
+        </div>
+    </th:block>
+
+    <h3>Please log in...</h3>
+
+    <form name="loginForm" th:action="@{/login}" th:object="${user}" method="post" class="w3-section">
+        <input type="text" id="login" name="login" th:placeholder="Login" class="w3-input"
+               style="width: 30%"/>
+        <input type="password" id="password" name="password" th:placeholder="Password" class="w3-input"
+               style="width: 30%"/>
+        <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+
+        <div class="w3-bar">
+            <button type="submit"
+                    class="w3-button w3-light-grey w3-round-medium w3-padding-small w3-margin-top w3-margin-bottom
+                    w3-hover-lime">Log in
+            </button>
+            <button type="reset"
+                    class="w3-button w3-light-grey w3-round-medium w3-padding-small w3-margin-top w3-margin-bottom
+                    w3-hover-amber" onclick="location.href='/'">Cancel
+            </button>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="_footer :: _footer"></th:block>
+
+</body>
+</html>
