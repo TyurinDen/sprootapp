@@ -17,8 +17,9 @@ public class UserRestController {
     public ResponseEntity<?> getSocialNetworkTypes() {
         List<String> socialProfileNames = Arrays.asList("Vk", "Facebook", "GitHub", "Google+");
         Map<Integer, String> socialTypeNames = new HashMap<>();
-        for (int i = 0; i < socialProfileNames.size(); i++) {
-            socialTypeNames.put(i, socialProfileNames.get(i));
+        int i = 1;
+        for (String s: socialProfileNames) {
+            socialTypeNames.put(i++, s);
         }
         return ResponseEntity.ok(socialTypeNames);
     }

@@ -3,30 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="/scripts/getRole.js"></script>
-    <script></script>
-    <script src="http://code.jquery.com/jquery-3.3.1.js">
-        // <!--integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
-        // <!--crossorigin="anonymous">-->
-    </script>
-    <!--<script>-->
-        <!--function getRole() {-->
-            <!--console.log("getRole function is invoked");-->
-            <!--$.ajax({-->
-                <!--type: "GET",-->
-                <!--url: '/users/api/getPrincipal',-->
-                <!--contentType: "application/json; charset=utf-8",-->
-                <!--success: function (user) {-->
-                    <!--console.log(user);-->
-                <!--},-->
-                <!--error: function (e) {-->
-                    <!--console.log("Error");-->
-                <!--}-->
-            <!--})-->
-        <!--}-->
-    <!--</script>-->
-
+    <!--<th:block th:replace="fragments/htmlFragments::header"></th:block>-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 </head>
 <body class="w3-white">
 
@@ -34,14 +22,35 @@
 <th:block th:replace="_menu :: _menu"></th:block>
 
 <div class="w3-container">
-    <h3>Home Page</h3>
-    <b>Application includes the following functions:</b>
-    <ul class="w3-ul">
-        <li style="width: 30%">View the list of users</li>
-        <li style="width: 30%">Create User</li>
-        <li style="width: 30%">Edit User</li>
-        <li style="width: 30%">Delete User</li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <button type="button" class="btn btn-info" onsubmit=location.href='/test/mailing'>mailing</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <button type="button" class="btn btn-info" onsubmit=location.href='/test/mailing'>mailing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="card" style="width: 18rem;">-->
+    <!--<div class="card-body">-->
+    <!--<h5 class="card-title">Card title</h5>-->
+    <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+    <!--<a href="/test/mailing" class="btn btn-primary btn-sm" role="button" aria-disabled="true">mailing</a>-->
+    <!--<button type="button" class="btn btn-info btn-sm" onsubmit="location.href='/test/mailing'">Small button</button>-->
+    <!--</div>-->
+    <!--</div>-->
 </div>
 <th:block th:replace="_footer :: _footer"></th:block>
 
