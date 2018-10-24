@@ -7,17 +7,27 @@
 </head>
 <body>
 <th:block th:fragment="_menu">
-    <div class="w3-bar w3-blue-gray w3-opacity">
-        <th:block sec:authorize="!isAuthenticated()">
-            <a class="w3-bar-item w3-button w3-hover-black" href="/">Home</a>
-            <a class="w3-bar-item w3-button w3-hover-black" href="/login">Login</a>
-        </th:block>
-        <th:block sec:authorize="isAuthenticated()">
-            <a class="w3-bar-item w3-button w3-hover-black" href="/">Home</a>
-            <a class="w3-bar-item w3-button w3-hover-black" href="/users/list">DB</a>
-            <a class="w3-bar-item w3-button w3-hover-black" href="/logout">Logout</a>
-        </th:block>
+    <div class="col-md-12 text-left">
+        <a href="#" class="badge badge-primary">Primary</a>
+        <a href="#" class="badge badge-secondary">Secondary</a>
+        <a href="#" class="badge badge-success">Success</a>
+        <a href="#" class="badge badge-danger">Danger</a>
+        <a href="#" class="badge badge-warning">Warning</a>
+        <a href="#" class="badge badge-info">Info</a>
+        <a href="#" class="badge badge-light">Light</a>
+        <a href="#" class="badge badge-dark">Dark</a>
     </div>
+    <!--<div class="w3-bar w3-blue-gray w3-opacity">-->
+    <!--<th:block sec:authorize="!isAuthenticated()">-->
+    <!--<a class="w3-bar-item w3-button w3-hover-black" href="/">Home</a>-->
+    <!--<a class="w3-bar-item w3-button w3-hover-black" href="/login">Login</a>-->
+    <!--</th:block>-->
+    <!--<th:block sec:authorize="isAuthenticated()">-->
+    <!--<a class="w3-bar-item w3-button w3-hover-black" href="/">Home</a>-->
+    <!--<a class="w3-bar-item w3-button w3-hover-black" href="/users/list">DB</a>-->
+    <!--<a class="w3-bar-item w3-button w3-hover-black" href="/logout">Logout</a>-->
+    <!--</th:block>-->
+    <!--</div>-->
 </th:block>
 </body>
 </html>
