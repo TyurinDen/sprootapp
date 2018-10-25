@@ -18,41 +18,38 @@
 </head>
 <body class="w3-white">
 
-<th:block th:replace="_header :: _header"></th:block>
-<th:block th:replace="_menu :: _menu"></th:block>
+<th:block th:replace="fragments/_header :: header"></th:block>
+<th:block th:replace="fragments/_menu :: menu"></th:block>
 
-<div class="w3-container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <button type="button" class="btn btn-info" onsubmit=location.href='/test/mailing'>mailing</button>
+<div class="alert alert-secondary">
+    <div class="w3-container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Рассылка</h5>
+                        <p class="card-text">Исправить страницу рассылки</p>
+                        <a href="/test/mailing" class="btn btn-success">/mailing</a>
+                    </div>
+                    <div class="card-footer">
+                        In progress
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <button type="button" class="btn btn-info" onsubmit=location.href='/test/mailing'>mailing</button>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <button type="button" class="btn btn-info" onsubmit=location.href='/test/mailing'>mailing
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="card" style="width: 18rem;">-->
-    <!--<div class="card-body">-->
-    <!--<h5 class="card-title">Card title</h5>-->
-    <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-    <!--<a href="/test/mailing" class="btn btn-primary btn-sm" role="button" aria-disabled="true">mailing</a>-->
-    <!--<button type="button" class="btn btn-info btn-sm" onsubmit="location.href='/test/mailing'">Small button</button>-->
-    <!--</div>-->
-    <!--</div>-->
 </div>
-<th:block th:replace="_footer :: _footer"></th:block>
 
+<th:block th:replace="fragments/_footer :: footer"></th:block>
 </body>
 </html>

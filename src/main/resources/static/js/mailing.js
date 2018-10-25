@@ -24,21 +24,34 @@ function switchMailingType() {
     }
 }
 
+//оригинальный блок
+// $(document).ready(function () {
+//     editor = CKEDITOR.replace('body1', {
+//         allowedContent: true,
+//         height: '400px',
+//     });
+//     editor.addCommand("infoCommend", {
+//         exec: function (edt) {
+//             $("#infoModal").modal('show');
+//         }
+//     });
+//     editor.ui.addButton('SuperButton', {
+//         label: "Info",
+//         command: 'infoCommend',
+//         toolbar: 'styles',
+//         icon: 'info.png'
+//     });
+//     var quill = new Quill('#editor', {
+//         modules: {toolbar: true},
+//         theme: 'snow'
+//     });
+// });
+
+//мой блок
 $(document).ready(function () {
-    editor = CKEDITOR.replace('body1', {
-        allowedContent: true,
-        height: '400px',
-    });
-    editor.addCommand("infoCommend", {
-        exec: function (edt) {
-            $("#infoModal").modal('show');
-        }
-    });
-    editor.ui.addButton('SuperButton', {
-        label: "Info",
-        command: 'infoCommend',
-        toolbar: 'styles',
-        icon: 'info.png'
+    var quill = new Quill('#editor', {
+        modules: {toolbar: true},
+        theme: 'snow'
     });
 });
 
