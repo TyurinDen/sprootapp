@@ -27,6 +27,7 @@ function switchMailingType() {
 //блок для редактора CKEditor
 $(document).ready(function () {
     editor = CKEDITOR.replace('editor1', {
+        customConfig: '/ckeditor/build-config.js',
         allowedContent: true,
         //width: 'auto',
         height: '300px',
