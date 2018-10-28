@@ -27,7 +27,6 @@ function switchMailingType() {
 //блок для редактора CKEditor
 $(document).ready(function () {
     editor = CKEDITOR.replace('editor1', {
-        customConfig: '/ckeditor/build-config.js',
         allowedContent: true,
         //width: 'auto',
         height: '300px',
@@ -59,7 +58,7 @@ function mail(sendnow) {
     let templateText = CKEDITOR.instances['body1'].getData();
     let clientData = $('#clientData1').val();
     let x;
-    if (type != "email") {
+    if (type !== "email") {
         x = text.value;
     } else {
         x = "";
@@ -85,23 +84,83 @@ function mail(sendnow) {
     });
 }
 
+//TODO Правильнее ли будет создать отдельные функции настройки элементов, а затем их вызывать здесь?
 $(document).ready(function () {
-    var nowDate = new Date();
-    var minutes = Math.ceil((nowDate.getMinutes() + 1) / 10) * 10;
-    var minDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours(), minutes, 0, 0);
-    var startDate = moment(minDate).utcOffset(180);
-    $('input[name="mailingDate"]').daterangepicker({
-        singleDatePicker: true,
-        timePicker: true,
-        timePickerIncrement: 10,
-        timePicker24Hour: true,
-        locale: {
-            format: 'DD.MM.YYYY HH:mm МСК'
+    //настраиваем datarangepicker (по умолчанию предназначенный для выбора диапазона дат)
+    let startDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа )
+    $('#mailingDate').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false, //не показывать номера недель
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa",
+                "Su"
+            ],
+            "monthNames": [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ],
+            "firstDay": 0
         },
-        minDate: startDate,
-        startDate: startDate
+        "linkedCalendars": false,
+        "startDate": startDate,
+        "minDate":  startDate //стартовая дата будет совпадать с минимальной
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 });
+
+// Не срабатывает. предназначен для установки текущий даты  в стартовую и мин даты
+$('#mailingDate').on('showCalendar.daterangepicker', function(ev, picker) {
+    let minDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа)
+        picker.minDate = minDate;
+        picker.startDate = minDate;
+});
+
+//Настройка datepicker
+// $(document).ready(function () {
+//     var nowDate = new Date();
+//     var minutes = Math.ceil((nowDate.getMinutes() + 1) / 10) * 10;
+//     var minDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours(), minutes, 0, 0);
+//     var startDate = moment(minDate).utcOffset(180);
+//     $('input[name="mailingDate"]').daterangepicker({
+//         singleDatePicker: true,
+//         timePicker: true,
+//         timePickerIncrement: 10,
+//         timePicker24Hour: true,
+//         locale: {
+//             format: 'DD.MM.YYYY HH:mm МСК'
+//         },
+//         minDate: startDate,
+//         startDate: startDate
+//     });
+// });
 
 /*$(document).ready(function () {
     editor.on('drop', function (e) {

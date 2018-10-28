@@ -30,86 +30,99 @@
 
     <!--Кнопки, поле выбора даты и тд-->
     <div class="container head-padding">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-2">
-                    <select style="font-size: 20px" class="form-inline" id="socNetworkChoose"
-                            th:onchange="'switchMailingType()'">
-                        <option value="email">email</option>
-                        <option value="vk">vk</option>
-                        <option value="sms">sms</option>
-                    </select>
-                </div>
-                <div class="col-xs-2">
-                    <span class="input-group-addon" id="basic-addon1">Date</span>
-                    <input type="text" class="form-control" name="mailingDate" id="mailingDate" aria-describedby="basic-addon1"/>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-primary" id="mailingStart" onclick="mail(0)">Mailing</button>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-primary" id="mailingNow" onclick="mail(1)">Send now</button>
-                </div>
-            </div>
-        </div>
-
-        <!--Блок закладок-->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                   aria-selected="true">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                   aria-controls="profile" aria-selected="false">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                   aria-controls="contact" aria-selected="false">Contact</a>
-            </li>
-        </ul>
-        <!--Содержимое вкладок-->
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-        </div>
-
-        <!--Блок редактора QuillJS-->
-        <!--<div id="editor">-->
-        <!--<p>Hello World!</p>-->
-        <!--<p>Some initial <strong>bold</strong> text</p>-->
-        <!--<p><br></p>-->
+        <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+        <!--<div class="col-xs-2">-->
+        <!--<select style="font-size: 20px" class="form-inline" id="socNetworkChoose"-->
+        <!--th:onchange="'switchMailingType()'">-->
+        <!--<option value="email">email</option>-->
+        <!--<option value="vk">vk</option>-->
+        <!--<option value="sms">sms</option>-->
+        <!--</select>-->
         <!--</div>-->
+        <!--<div class="col-xs-2">-->
+        <!--<span class="input-group-addon" id="basic-addon1">Date</span>-->
+        <!--<input type="text" class="form-control" name="mailingDate" id="mailingDate"-->
+        <!--aria-describedby="basic-addon1"/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-2">-->
+        <!--<button class="btn btn-primary" id="mailingStart" onclick="mail(0)">Mailing</button>-->
+        <!--</div>-->
+        <!--<div class="col-xs-2">-->
+        <!--<button class="btn btn-primary" id="mailingNow" onclick="mail(1)">Send now</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">-->
+            <div class="btn-group" role="group" aria-label="First group">
+                <button type="button" class="btn btn-primary">E-mail</button>
+                <button type="button" class="btn btn-primary">SMS</button>
+                <button type="button" class="btn btn-primary">SN</button>
+            </div>
+            <div class="input-group">
+                <!--<div class="input-group-prepend">-->
+                    <!--<div class="input-group-text" id="btnGroupAddon">Date</div>-->
+                <!--</div>-->
+                <!--<input type="text" class="form-control" placeholder="Date" aria-label="Date"-->
+                       <!--aria-describedby="btnGroupAddon" name="mailingDate" id="mailingDate">-->
+                <span class="input-group-addon" id="basic-addon1">Date</span>
+                <input type="text" class="form-control" placeholder="Date" aria-label="Date"
+                       aria-describedby="basic-addon1" name="mailingDate" id="mailingDate">
+            </div>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+            </label>
+        </div>
+        <div class="input-group">
+            <!--<div class="input-group-prepend">-->
+            <!--<div class="input-group-text" id="btnGroupAddon">Date</div>-->
+            <!--</div>-->
+            <!--<input type="text" class="form-control" placeholder="Date" aria-label="Date"-->
+            <!--aria-describedby="btnGroupAddon" name="mailingDate" id="mailingDate">-->
+            <span class="input-group-addon" id="basic-addon1">Date</span>
+            <input type="text" class="form-control" placeholder="Date" aria-label="Date"
+                   aria-describedby="basic-addon1" name="mailingDate" id="mailingDate">
+        </div>
+
+
+        </div>
 
         <!--Блок редактора CKEditor-->
         <textarea id="editor1" name="editor1">
             <p>Put your text here</p>
         </textarea>
 
-        <!--Блок редактора CKEditor-->
+        <!--Оригинальный блок редактора CKEditor-->
         <!--<div class="container">-->
-            <!--<fieldset id="field">-->
-                <!--<label for="body1"></label>-->
-                <!--<textarea class="container" id="body1"-->
-                          <!--required="required">&lt;p&gt;Example template layout.&lt;/p&gt;</textarea>-->
-                <!--<br/>-->
-            <!--</fieldset>-->
+        <!--<fieldset id="field">-->
+        <!--<label for="body1"></label>-->
+        <!--<textarea class="container" id="body1"-->
+        <!--required="required">&lt;p&gt;Example template layout.&lt;/p&gt;</textarea>-->
+        <!--<br/>-->
+        <!--</fieldset>-->
 
-            <!--Блок ввода адресов, телефонных номеров, ссылок на социальные сети-->
-            <div class="col-md-12" style="display: none;padding-left: 0%" id="vkArea">
-                <textarea style="width: 1138px" th:id="vkArea1" rows="16"></textarea>
-            </div>
-            <div class="col-md-12" style="display: none;padding-left: 0%" id="smsArea">
-                <textarea style="width: 1138px" th:id="smsArea1" rows="16"></textarea>
-            </div>
-            <div class="col-md-12" style="padding-left: 0%" id="clientData">
-                <textarea style="width: 1138px" th:id="clientData1" rows="16"></textarea>
-            </div>
+        <!--Блок ввода адресов, телефонных номеров, ссылок на социальные сети-->
+        <div class="col-md-12" style="display: none;padding-left: 0%" id="vkArea">
+            <textarea style="width: 1138px" th:id="vkArea1" rows="16"></textarea>
         </div>
+        <div class="col-md-12" style="display: none;padding-left: 0%" id="smsArea">
+            <textarea style="width: 1138px" th:id="smsArea1" rows="16"></textarea>
+        </div>
+        <div class="col-md-12" style="padding-left: 0%" id="clientData">
+            <textarea style="width: 1138px" th:id="clientData1" rows="16"></textarea>
+        </div>
+    </div>
 
     <!--Модалка с подсказкой про шаблоны сообщений-->
-    <div class="modal fade" id="infoModal"  role="dialog"  aria-hidden="true">
+    <div class="modal fade" id="infoModal" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -126,7 +139,9 @@
                         <li>%fullName% - Фамилия и имя клиента;</li>
                     </ul>
                     <ul>
-                        <li>%bodyText% - Кастомный текст. При отправке сообщения будет отображено окно для ввода этого текста;</li>
+                        <li>%bodyText% - Кастомный текст. При отправке сообщения будет отображено окно для ввода этого
+                            текста;
+                        </li>
                     </ul>
                 </div>
             </div>
