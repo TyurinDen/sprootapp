@@ -29,7 +29,7 @@ $(document).ready(function () {
     editor = CKEDITOR.replace('editor1', {
         allowedContent: true,
         //width: 'auto',
-        height: '300px',
+        //height: '300px',
     });
     editor.addCommand("infoCommend", {
         exec: function (edt) {
@@ -130,17 +130,18 @@ $(document).ready(function () {
         },
         "linkedCalendars": false,
         "startDate": startDate,
-        "minDate":  startDate //стартовая дата будет совпадать с минимальной
+        "minDate": startDate //стартовая дата будет совпадать с минимальной
     }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+                    end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 });
 
-// Не срабатывает. предназначен для установки текущий даты  в стартовую и мин даты
-$('#mailingDate').on('showCalendar.daterangepicker', function(ev, picker) {
+//Не срабатывает. Предназначен для установки текущей даты в стартовую и мин даты при открытии календаря
+$('#mailingDate').on('showCalendar.daterangepicker', function (ev, picker) {
     let minDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа)
-        picker.minDate = minDate;
-        picker.startDate = minDate;
+    picker.minDate = minDate;
+    picker.startDate = minDate;
 });
 
 //Настройка datepicker

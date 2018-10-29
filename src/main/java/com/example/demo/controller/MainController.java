@@ -18,6 +18,12 @@ public class MainController {
         return mailing;
     }
 
+    @RequestMapping(value = "/new-mailing", method = GET)
+    public ModelAndView newMailing() {
+        ModelAndView newMailing = new ModelAndView("new-mailing");
+        return newMailing;
+    }
+
     @RequestMapping(value = "/add-client", method = GET)
     public ModelAndView home(@AuthenticationPrincipal CustomUser user) {
         ModelAndView addClient = new ModelAndView("add-client");
