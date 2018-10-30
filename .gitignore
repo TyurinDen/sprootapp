@@ -1,6 +1,9 @@
 /target/
-/src/main/java/resources/ckeditor
+/src/main/java/resources/static/ckeditor
+/src/main/java/resources/static/ckeditor/
+!/src/main/java/resources/static/ckeditor/info.png
 !.mvn/wrapper/maven-wrapper.jar
+/src/main/java/resources/static/js/ckeditor.js
 
 ### STS ###
 .apt_generated
