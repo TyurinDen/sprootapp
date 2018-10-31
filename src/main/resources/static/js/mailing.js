@@ -1,33 +1,35 @@
 let type = 'email';
 let text;
 
-function switchMailingType() {
-    var selected = $('#socNetworkChoose').val();
-    if (selected === 'email') {
-        type = 'email';
-        $('#field').show();
-        $('#vkArea').hide();
-        $('#smsArea').hide();
-    } else if (selected === 'vk') {
-        type = 'vk';
-        $('#field').hide();
-        $('#vkArea').show();
-        $('#smsArea').hide();
-        text = document.getElementById("vkArea1");
-    }
-    else if (selected === 'sms') {
-        type = 'sms';
-        $('#field').hide();
-        $('#vkArea').hide();
-        $('#smsArea').show();
-        text = document.getElementById("smsArea1");
-    }
+function ChangeMessageType() {
+    console.warn("Button pressed!");
+    $('.btn-group-primary .btn').addClass('btn-primary');
+    // var selected = $('#socNetworkChoose').val();
+    // if (selected === 'email') {
+    //     type = 'email';
+    //     $('#field').show();
+    //     $('#vkArea').hide();
+    //     $('#smsArea').hide();
+    // } else if (selected === 'vk') {
+    //     type = 'vk';
+    //     $('#field').hide();
+    //     $('#vkArea').show();
+    //     $('#smsArea').hide();
+    //     text = document.getElementById("vkArea1");
+    // }
+    // else if (selected === 'sms') {
+    //     type = 'sms';
+    //     $('#field').hide();
+    //     $('#vkArea').hide();
+    //     $('#smsArea').show();
+    //     text = document.getElementById("smsArea1");
+    // }
 }
 
 //блок для редактора CKEditor
 $(document).ready(function () {
-    editor = CKEDITOR.replace('editor1', {
-        allowedContent: true,
+    editor = CKEDITOR.replace('editor', {
+        allowedContent: true
         //width: 'auto',
         //height: '300px',
     });
@@ -43,15 +45,6 @@ $(document).ready(function () {
         icon: 'info.png'
     });
 });
-
-//блок для редактора Quill
-// $(document).ready(function () {
-//     var quill = new Quill('#editor', {
-//         modules: {toolbar: true},
-//         theme: 'snow'
-//     });
-// });
-
 
 function mail(sendnow) {
     let date = $('#mailingDate').val();
@@ -84,6 +77,17 @@ function mail(sendnow) {
     });
 }
 
+$(document).ready(function () {
+    $("#button-toolbar-1").click(function () {
+        var thisButton = this;
+        console.log(thisButton);
+        $(":button").each(function (index, element) {
+            console.log("index: " + index, "element: " + element);
+            $(this).addClass("btn-primary");
+        });
+        //$(thisButton).addClass("btn-info");
+    });
+});
 //TODO Правильнее ли будет создать отдельные функции настройки элементов, а затем их вызывать здесь?
 $(document).ready(function () {
     //настраиваем datarangepicker (по умолчанию предназначенный для выбора диапазона дат)
@@ -133,7 +137,7 @@ $(document).ready(function () {
         "minDate": startDate //стартовая дата будет совпадать с минимальной
     }, function (start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
-                    end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 });
 
