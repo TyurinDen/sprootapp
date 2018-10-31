@@ -78,14 +78,18 @@ function mail(sendnow) {
 }
 
 $(document).ready(function () {
-    $("#button-toolbar-1").click(function () {
+    $("#button-group-1 > button").click(function () {
         var thisButton = this;
-        console.log(thisButton);
-        $(":button").each(function (index, element) {
-            console.log("index: " + index, "element: " + element);
-            $(this).addClass("btn-primary");
+        //console.log(thisButton);
+        $("#button-group-1 > button").each(function (index, element) {
+            //console.log("index: " + index, "element: " + element);
+            if ($(element).filter(".btn-success")) {
+                console.log(index, " ", element);
+            }
+            // $(element).removeClass("btn-secondary");
+            // $(element).addClass("btn-secondary");
         });
-        //$(thisButton).addClass("btn-info");
+        // $(thisButton).addClass("btn-info");
     });
 });
 //TODO Правильнее ли будет создать отдельные функции настройки элементов, а затем их вызывать здесь?
