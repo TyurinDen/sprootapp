@@ -77,28 +77,33 @@ function mail(sendnow) {
     });
 }
 
+/**
+ * Функция, переключающая состояние кнопок режима рассылки и перенастраивающая интерфейс редактора.
+ * Например для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины оформления
+ * текста как и для отправки сообщений в Вк.
+ */
 $(document).ready(function () {
     $("#button-group-1 > button").click(function () {
-        var thisButton = this;
-        //console.log(thisButton);
+        var btnPressed = this;
+        console.log(btnPressed);
         $("#button-group-1 > button").each(function (index, element) {
-            //console.log("index: " + index, "element: " + element);
-            if ($(element).filter(".btn-success")) {
-                console.log(index, " ", element);
+            if ($(element).hasClass("btn-info")) {
+                $(element).removeClass("btn-info");
+                $(element).addClass("btn-secondary");
             }
-            // $(element).removeClass("btn-secondary");
-            // $(element).addClass("btn-secondary");
+            $(btnPressed).addClass("btn-info");
         });
-        // $(thisButton).addClass("btn-info");
     });
 });
-//TODO Правильнее ли будет создать отдельные функции настройки элементов, а затем их вызывать здесь?
+
+/**
+ * Функция, настраивающая datarangepicker (по умолчанию предназначенный для выбора диапазона дат)
+ */
 $(document).ready(function () {
-    //настраиваем datarangepicker (по умолчанию предназначенный для выбора диапазона дат)
     let startDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа )
-    $('#mailingDate').daterangepicker({
+    $('#messageSendingTime').daterangepicker({
         "singleDatePicker": true, //отключаем выбор диапазона дат (range)
-        "showWeekNumbers": false, //не показывать номера недель
+        "showWeekNumbers": false,
         "timePicker": true,
         "timePicker24Hour": true,
         "timePickerIncrement": 10,
@@ -111,29 +116,8 @@ $(document).ready(function () {
             "toLabel": "To",
             "customRangeLabel": "Custom",
             "weekLabel": "W",
-            "daysOfWeek": [
-                "Mo",
-                "Tu",
-                "We",
-                "Th",
-                "Fr",
-                "Sa",
-                "Su"
-            ],
-            "monthNames": [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec"
-            ],
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             "firstDay": 0
         },
         "linkedCalendars": false,
@@ -146,11 +130,32 @@ $(document).ready(function () {
 });
 
 //Не срабатывает. Предназначен для установки текущей даты в стартовую и мин даты при открытии календаря
-$('#mailingDate').on('showCalendar.daterangepicker', function (ev, picker) {
+$('#messageSendingTime').on('showCalendar.daterangepicker', function (ev, picker) {
     let minDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа)
     picker.minDate = minDate;
     picker.startDate = minDate;
 });
+
+$(document).ready(function () {
+   $("#address-area").on("drop", function (event) {
+       event.preventDefault();
+       console.warn(event);
+       //event.preventDefault();
+   })
+});
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     var dropZone1 = document.getElementById("clientData1");
+//     dropZone1.addEventListener('drop', function (e) {
+//         event.preventDefault();
+//         var files = e.dataTransfer.files[0];
+//         var reader = new FileReader();
+//         reader.onload = function () {
+//             dropZone1.value += "\n" + this.result;
+//         };
+//         reader.readAsBinaryString(files);
+//     }, false);
+// }, false);
 
 //Настройка datepicker
 // $(document).ready(function () {
@@ -185,16 +190,3 @@ $('#mailingDate').on('showCalendar.daterangepicker', function (ev, picker) {
         reader.readAsBinaryString(files);
     });
 });*/
-
-document.addEventListener('DOMContentLoaded', function () {
-    var dropZone1 = document.getElementById("clientData1");
-    dropZone1.addEventListener('drop', function (e) {
-        event.preventDefault();
-        var files = e.dataTransfer.files[0];
-        var reader = new FileReader();
-        reader.onload = function () {
-            dropZone1.value += "\n" + this.result;
-        };
-        reader.readAsBinaryString(files);
-    }, false);
-}, false);

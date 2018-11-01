@@ -40,11 +40,11 @@
 </header>
 <section>
     <div class="container-fluid" id="menu-block">
-        <div class="row">
+        <div class="row flex-nowrap">
             <div class="col-lg-auto col-md-auto col-sm-auto">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm mr-2" role="group"  id="button-group-1" th:onclick="'ChangeMessageType()'">
-                        <button type="button" class="btn btn-success">Send via e-mail</button>
+                        <button type="button" class="btn btn-info">Send via e-mail</button>
                         <button type="button" class="btn btn-secondary">Send via sms</button>
                         <button type="button" class="btn btn-secondary">Send to vk</button>
                     </div>
@@ -62,19 +62,19 @@
                 <!--</div>-->
             </div>
             <div class="col-lg-auto col-md-auto col-sm-auto">
-                <div class="input-group input-group-sm position-relative">
+                <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text text-light bg-info" id="basic-addon1">Date</span>
+                        <span class="input-group-text text-light bg-info" id="date-addon">Date</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Date" aria-label="Date"
-                           aria-describedby="basic-addon1" name="mailingDate" id="mailingDate">
+                    <input type="text" class="form-control" aria-label="Date"
+                           aria-describedby="date-addon" name="messageSendingTime" id="messageSendingTime">
                 </div>
             </div>
             <div class="col-lg-auto col-md-auto col-sm-auto">
-                <button class="btn btn-secondary btn-sm" id="mailingStart" onclick="mail(0)">Mailing</button>
+                <button class="btn btn-warning btn-sm" id="mailingStart" onclick="mail(0)">Send later</button>
             </div>
             <div class="col-lg-auto col-md-auto col-sm-auto">
-                <button class="btn btn-secondary btn-sm" id="mailingNow" onclick="mail(1)">Send now</button>
+                <button class="btn btn-success btn-sm" id="mailingNow" onclick="mail(1)">Send now</button>
             </div>
         </div>
     </div>
@@ -90,8 +90,8 @@
             <div class="col-xs-3 col-sm-12 col-md-12 col-lg-12 col-xl-4 green-border-focus">
                 <!--Блок адресов-->
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea3">Address block</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="12"></textarea>
+                    <label for="address-area">Address block</label>
+                    <textarea class="form-control" id="address-area" rows="12"></textarea>
                 </div>
             </div>
         </div>
