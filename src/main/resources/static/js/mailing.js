@@ -79,8 +79,8 @@ function mail(sendnow) {
 
 /**
  * Функция, переключающая состояние кнопок режима рассылки и перенастраивающая интерфейс редактора.
- * Например для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины оформления
- * текста как и для отправки сообщений в Вк.
+ * Например для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины форматирования
+ * текста. Так же как и для отправки сообщений в Вк.
  */
 $(document).ready(function () {
     $("#button-group-1 > button").click(function () {
@@ -97,7 +97,7 @@ $(document).ready(function () {
 });
 
 /**
- * Функция, настраивающая datarangepicker (по умолчанию предназначенный для выбора диапазона дат)
+ * Функция, настраивающая datarangepicker
  */
 $(document).ready(function () {
     let startDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа )
@@ -137,11 +137,32 @@ $('#messageSendingTime').on('showCalendar.daterangepicker', function (ev, picker
 });
 
 $(document).ready(function () {
-   $("#address-area").on("drop", function (event) {
-       event.preventDefault();
-       console.warn(event);
-       //event.preventDefault();
-   })
+    $("#addresses-area").on("drop", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        let reader = new FileReader();
+        let file = event.originalEvent.dataTransfer.files[0];
+        reader.onload = function(event) {
+            let content = event.target.result;
+            $("#addresses-area").val(content);
+        };
+        reader.onerror = function(event) {
+            console.error("The file could not be read!" + event.target.error.code);
+        };
+        reader.readAsText(file);
+    })
+});
+
+$(document).ready(function () {
+    $("#addresses-area").on("dragover", function (event) {
+        $(this).addClass("drop-zone-is-dragover");
+        // let file = event.originalEvent.dataTransfer.files[0];
+        // $("#addresses-area").val(file);
+        // console.warn(file);
+    })
+        .on("dragleave dragend drop", function () {
+            $(this).removeClass("drop-zone-is-dragover");
+        })
 });
 
 // document.addEventListener('DOMContentLoaded', function () {
