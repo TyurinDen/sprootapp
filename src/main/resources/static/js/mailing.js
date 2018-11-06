@@ -33,6 +33,13 @@ $(document).ready(function () {
         //width: 'auto',
         //height: '300px',
     });
+    CKEDITOR.config.toolbarGroups = [
+        { name: 'document',    groups: [ 'mode', 'document' ] },
+        { name: 'my_clipboard',   groups: [ 'clipboard', 'undo' ] },
+        '/',
+        { name: 'styles' },
+        { name: 'links' }
+    ];
     editor.addCommand("infoCommend", {
         exec: function (edt) {
             $("#infoModal").modal('show');
@@ -85,7 +92,7 @@ function mail(sendnow) {
 $(document).ready(function () {
     $("#button-group-1 > button").click(function () {
         var btnPressed = this;
-        console.log(btnPressed);
+        //console.log(btnPressed);
         $("#button-group-1 > button").each(function (index, element) {
             if ($(element).hasClass("btn-info")) {
                 $(element).removeClass("btn-info");
@@ -142,24 +149,29 @@ $(document).ready(function () {
         event.stopPropagation();
         let reader = new FileReader();
         let file = event.originalEvent.dataTransfer.files[0];
-        reader.onload = function(event) {
+        //console.warn(file.name + " " + file.size);
+        $("#file-info").text("Файл: " + file.name + ", Размер файла: " + file.size);
+        reader.onload = function (event) {
             let content = event.target.result;
-            $("#addresses-area").val(content);
+            $("#addresses-area").val(content.toLowerCase());
         };
-        reader.onerror = function(event) {
+        reader.onerror = function (event) {
             console.error("The file could not be read!" + event.target.error.code);
+            let fileInfo = $("#file-info");
+            //TODO переделать с проверкой, чтобы все было корректно
+            $(fileInfo).text("The file could not be read!" + event.target.error.code);
+            $(fileInfo).removeClass("badge-success");
+            $(fileInfo).addClass("badge-warning");
         };
         reader.readAsText(file);
     })
 });
 
 $(document).ready(function () {
-    $("#addresses-area").on("dragover", function (event) {
-        $(this).addClass("drop-zone-is-dragover");
-        // let file = event.originalEvent.dataTransfer.files[0];
-        // $("#addresses-area").val(file);
-        // console.warn(file);
-    })
+    $("#addresses-area")
+        .on("dragover", function (event) {
+            $(this).addClass("drop-zone-is-dragover");
+        })
         .on("dragleave dragend drop", function () {
             $(this).removeClass("drop-zone-is-dragover");
         })
