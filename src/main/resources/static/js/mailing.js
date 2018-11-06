@@ -29,19 +29,11 @@ function ChangeMessageType() {
 //блок для редактора CKEditor
 $(document).ready(function () {
     editor = CKEDITOR.replace('editor', {
-        allowedContent: true
-        //width: 'auto',
-        //height: '300px',
+        allowedContent: true,
+        //customConfig: '/ckeditor/custom_config.js'
     });
-    CKEDITOR.config.toolbarGroups = [
-        { name: 'document',    groups: [ 'mode', 'document' ] },
-        { name: 'my_clipboard',   groups: [ 'clipboard', 'undo' ] },
-        '/',
-        { name: 'styles' },
-        { name: 'links' }
-    ];
     editor.addCommand("infoCommend", {
-        exec: function (edt) {
+        exec: function () {
             $("#infoModal").modal('show');
         }
     });
@@ -54,9 +46,14 @@ $(document).ready(function () {
 });
 
 function mail(sendnow) {
-    let date = $('#mailingDate').val();
-    let templateText = CKEDITOR.instances['body1'].getData();
-    let clientData = $('#clientData1').val();
+    console.warn(sendnow);
+    let date = $('#messageSendingTime').val();
+    console.warn(date);
+    //let text = CKEDITOR.instances['body1'].getData();
+    let text = CKEDITOR.instances.editor.getData();
+    console.warn(text);
+    let recipients = $('#addresses-area').val();
+    console.warn(recipients);
     let x;
     if (type !== "email") {
         x = text.value;
@@ -66,7 +63,7 @@ function mail(sendnow) {
     let wrap = {
         sendnow: sendnow,
         type: type,
-        templateText: templateText,
+        content: text,
         text: x,
         date: date,
         clientData: clientData
@@ -78,8 +75,8 @@ function mail(sendnow) {
         success: function (result) {
             console.log("success " + result);
         },
-        error: function (e) {
-            console.log("неверный формат записи, добавте clientData перед данными\n" + e);
+        error: function (error) {
+            console.log("неверный формат записи, добавте clientData перед данными\n" + error);
         }
     });
 }
@@ -136,7 +133,7 @@ $(document).ready(function () {
     });
 });
 
-//Не срабатывает. Предназначен для установки текущей даты в стартовую и мин даты при открытии календаря
+//TODO Не срабатывает. Предназначен для установки текущей даты в стартовую и мин даты при открытии календаря
 $('#messageSendingTime').on('showCalendar.daterangepicker', function (ev, picker) {
     let minDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа)
     picker.minDate = minDate;
@@ -176,50 +173,3 @@ $(document).ready(function () {
             $(this).removeClass("drop-zone-is-dragover");
         })
 });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     var dropZone1 = document.getElementById("clientData1");
-//     dropZone1.addEventListener('drop', function (e) {
-//         event.preventDefault();
-//         var files = e.dataTransfer.files[0];
-//         var reader = new FileReader();
-//         reader.onload = function () {
-//             dropZone1.value += "\n" + this.result;
-//         };
-//         reader.readAsBinaryString(files);
-//     }, false);
-// }, false);
-
-//Настройка datepicker
-// $(document).ready(function () {
-//     var nowDate = new Date();
-//     var minutes = Math.ceil((nowDate.getMinutes() + 1) / 10) * 10;
-//     var minDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), nowDate.getHours(), minutes, 0, 0);
-//     var startDate = moment(minDate).utcOffset(180);
-//     $('input[name="mailingDate"]').daterangepicker({
-//         singleDatePicker: true,
-//         timePicker: true,
-//         timePickerIncrement: 10,
-//         timePicker24Hour: true,
-//         locale: {
-//             format: 'DD.MM.YYYY HH:mm МСК'
-//         },
-//         minDate: startDate,
-//         startDate: startDate
-//     });
-// });
-
-/*$(document).ready(function () {
-    editor.on('drop', function (e) {
-        var files = e.data.dataTransfer.getFile(0);
-        var reader = new FileReader();
-        reader.onload = function () {
-            if (CKEDITOR.instances["body1"].getData().includes("clientData")) {
-                editor.insertText("\n\n" + this.result);
-            } else {
-                editor.insertText("\nclientData\n" + this.result);
-            }
-        };
-        reader.readAsBinaryString(files);
-    });
-});*/

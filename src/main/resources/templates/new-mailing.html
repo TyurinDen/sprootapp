@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"-->
-            <!--integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"-->
-            <!--crossorigin="anonymous"></script>-->
+    <!--integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"-->
+    <!--crossorigin="anonymous"></script>-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -43,23 +43,13 @@
         <div class="row flex-nowrap">
             <div class="col-lg-auto col-md-auto col-sm-auto">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="btn-group btn-group-sm mr-2" role="group"  id="button-group-1" th:onclick="'ChangeMessageType()'">
+                    <div class="btn-group btn-group-sm mr-2" role="group" id="button-group-1"
+                         th:onclick="'ChangeMessageType()'">
                         <button type="button" class="btn btn-info">Send via e-mail</button>
                         <button type="button" class="btn btn-secondary">Send via sms</button>
                         <button type="button" class="btn btn-secondary">Send to vk</button>
                     </div>
                 </div>
-                <!--<div class="dropdown">-->
-                    <!--<button class="btn btn-info dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1"-->
-                            <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="15,10">-->
-                        <!--Dropdown button-->
-                    <!--</button>-->
-                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
-                        <!--<a class="dropdown-item" href="#">Send e-mail</a>-->
-                        <!--<a class="dropdown-item" href="#">Send sms</a>-->
-                        <!--<a class="dropdown-item" href="#">Send to Vk</a>-->
-                    <!--</div>-->
-                <!--</div>-->
             </div>
             <div class="col-lg-auto col-md-auto col-sm-auto">
                 <div class="input-group input-group-sm">
@@ -91,23 +81,52 @@
                 <!--Блок адресов-->
                 <div class="form-group">
                     <label for="addresses-area">Addresses block</label>
-                    <textarea class="form-control text-lowercase" id="addresses-area" rows="12" style="font-size: 10pt"></textarea>
+                    <textarea class="form-control text-lowercase" id="addresses-area" rows="12"
+                              style="font-size: 10pt"></textarea>
                     <span class="badge badge-success" id="file-info"></span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container" id="address-block">
-        <div class="row">
+    <!--<div class="container" id="address-block">-->
+    <!--<div class="row">-->
 
-        </div>
-    </div>
+    <!--</div>-->
+    <!--</div>-->
 </section>
 
 <footer>
     <div class="container-fluid" id="footer">
     </div>
 </footer>
+
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Краткая информация о редакторе</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Ключевые слова заключены в знаки процента <b>%</b></p>
+                <p>При отправке сообщения они будут заменены на соответсвующие им значения<br>
+                    Например: <b>%fullName%</b> будет заменен на имя и фамилию клиента.</p>
+                <p>Поддерживаемые ключевые слова:<br>
+                    <b>%fullName% - Фамилия и имя клиента</b><br>
+                    <b>%bodyText% - Кастомный текст.</b><br>
+                <p>При отправке сообщения будет отображено окно для ввода этого текста.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
