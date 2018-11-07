@@ -1,4 +1,12 @@
-let type = 'email';
+const BUTTON_INFO_CLASS = "btn-info";
+const BUTTON_SECONDARY_CLASS = "btn-secondary";
+const DROP_ZONE_IS_DRAGOVER_CLASS = "drop-zone-is-dragover";
+const BADGE_SUCCESS_CLASS = "badge-success";
+const BADGE_WARNING_CLASS = "badge-warning";
+const EDITOR = "editor";
+const URL_POST_DATA = "/client/mailing/send";
+var messageType = 'email';
+
 let text;
 
 function ChangeMessageType() {
@@ -28,9 +36,9 @@ function ChangeMessageType() {
 
 //блок для редактора CKEditor
 $(document).ready(function () {
-    editor = CKEDITOR.replace('editor', {
+    editor = CKEDITOR.replace(EDITOR, {
         allowedContent: true,
-        //customConfig: '/ckeditor/custom_config.js'
+        customConfig: '/ckeditor/custom_config.js'
     });
     editor.addCommand("infoCommend", {
         exec: function () {
@@ -49,7 +57,6 @@ function mail(sendnow) {
     console.warn(sendnow);
     let date = $('#messageSendingTime').val();
     console.warn(date);
-    //let text = CKEDITOR.instances['body1'].getData();
     let text = CKEDITOR.instances.editor.getData();
     console.warn(text);
     let recipients = $('#addresses-area').val();
@@ -70,7 +77,7 @@ function mail(sendnow) {
     };
     $.ajax({
         type: "POST",
-        url: "/client/mailing/send",
+        url: URL_POST_DATA,
         data: wrap,
         success: function (result) {
             console.log("success " + result);
@@ -84,19 +91,20 @@ function mail(sendnow) {
 /**
  * Функция, переключающая состояние кнопок режима рассылки и перенастраивающая интерфейс редактора.
  * Например для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины форматирования
- * текста. Так же как и для отправки сообщений в Вк.
+ * текста. Так же как и для отправки сообщений в Вк. Также меняется тип сообщения, messageType.
  */
 $(document).ready(function () {
-    $("#button-group-1 > button").click(function () {
+    $("#message-type-button-group > button").click(function () {
         var btnPressed = this;
-        //console.log(btnPressed);
-        $("#button-group-1 > button").each(function (index, element) {
-            if ($(element).hasClass("btn-info")) {
-                $(element).removeClass("btn-info");
-                $(element).addClass("btn-secondary");
+        messageType = $(btnPressed).attr("id");
+        //console.log(messageType);
+        $("#message-type-button-group > button").each(function (index, element) {
+            if ($(element).hasClass(BUTTON_INFO_CLASS)) {
+                $(element).removeClass(BUTTON_INFO_CLASS);
+                $(element).addClass(BUTTON_SECONDARY_CLASS);
             }
-            $(btnPressed).addClass("btn-info");
         });
+        $(btnPressed).addClass(BUTTON_INFO_CLASS);
     });
 });
 
@@ -144,6 +152,7 @@ $(document).ready(function () {
     $("#addresses-area").on("drop", function (event) {
         event.preventDefault();
         event.stopPropagation();
+        $("#addresses-area").removeClass("drop-zone-is-dragover");
         let reader = new FileReader();
         let file = event.originalEvent.dataTransfer.files[0];
         //console.warn(file.name + " " + file.size);
@@ -157,8 +166,8 @@ $(document).ready(function () {
             let fileInfo = $("#file-info");
             //TODO переделать с проверкой, чтобы все было корректно
             $(fileInfo).text("The file could not be read!" + event.target.error.code);
-            $(fileInfo).removeClass("badge-success");
-            $(fileInfo).addClass("badge-warning");
+            $(fileInfo).removeClass(BADGE_SUCCESS_CLASS);
+            $(fileInfo).addClass(BADGE_WARNING_CLASS);
         };
         reader.readAsText(file);
     })
@@ -167,9 +176,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#addresses-area")
         .on("dragover", function (event) {
-            $(this).addClass("drop-zone-is-dragover");
+            $(this).addClass(DROP_ZONE_IS_DRAGOVER_CLASS);
         })
         .on("dragleave dragend drop", function () {
-            $(this).removeClass("drop-zone-is-dragover");
+            $(this).removeClass(DROP_ZONE_IS_DRAGOVER_CLASS);
         })
 });
