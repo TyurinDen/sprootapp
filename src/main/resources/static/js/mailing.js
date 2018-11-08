@@ -5,6 +5,10 @@ const BADGE_SUCCESS_CLASS = "badge-success";
 const BADGE_WARNING_CLASS = "badge-warning";
 const EDITOR = "editor";
 const URL_POST_DATA = "/client/mailing/send";
+const SEND_EMAILS = "Enter the recipients email address here:";
+const SEND_SMSS = "Enter phone numbers here:";
+const SEND_TO_VK = "Enter VK ids here:";
+
 var messageType = 'email';
 
 let text;
@@ -97,6 +101,13 @@ $(document).ready(function () {
     $("#message-type-button-group > button").click(function () {
         var btnPressed = this;
         messageType = $(btnPressed).attr("id");
+        if (messageType === 'email') {
+            $("#addresses-label").text(SEND_EMAILS);
+        } else if (messageType === 'sms') {
+            $("#addresses-label").text(SEND_SMSS);
+        } else {
+            $("#addresses-label").text(SEND_TO_VK);
+        }
         //console.log(messageType);
         $("#message-type-button-group > button").each(function (index, element) {
             if ($(element).hasClass(BUTTON_INFO_CLASS)) {
