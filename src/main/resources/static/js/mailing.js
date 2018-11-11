@@ -40,20 +40,9 @@ function ChangeMessageType() {
 
 //блок для редактора CKEditor
 $(document).ready(function () {
-    editor = CKEDITOR.replace(EDITOR, {
-        allowedContent: true,
-        customConfig: '/ckeditor/custom_config.js'
-    });
-    editor.addCommand("infoCommend", {
-        exec: function () {
-            $("#infoModal").modal('show');
-        }
-    });
-    editor.ui.addButton('SuperButton', {
-        label: "Info",
-        command: 'infoCommend',
-        toolbar: 'styles',
-        icon: 'info.png'
+    CKEDITOR.addCss('.cke_editable p { margin: 0 !important; }');
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/add-all-toolbars.js'
     });
 });
 
@@ -92,30 +81,53 @@ function mail(sendnow) {
     });
 }
 
+function ckeditorRemoveAllToolbars() {
+    CKEDITOR.instances[EDITOR].destroy(true);
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/remove-all-toolbars.js'
+    });
+}
+
+function ckeditorAddAllToolbars() {
+    CKEDITOR.instances[EDITOR].destroy(true);
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/add-all-toolbars.js'
+    });
+}
+
 /**
  * Функция, переключающая состояние кнопок режима рассылки и перенастраивающая интерфейс редактора.
- * Например для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины форматирования
- * текста. Так же как и для отправки сообщений в Вк. Также меняется тип сообщения, messageType.
+ * Для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины форматирования
+ * текста, так же, как и для отправки сообщений в Вк. Плюс меняется тип сообщения, messageType.
  */
 $(document).ready(function () {
     $("#message-type-button-group > button").click(function () {
-        var btnPressed = this;
-        messageType = $(btnPressed).attr("id");
-        if (messageType === 'email') {
-            $("#addresses-label").text(SEND_EMAILS);
-        } else if (messageType === 'sms') {
-            $("#addresses-label").text(SEND_SMSS);
-        } else {
-            $("#addresses-label").text(SEND_TO_VK);
+        if (messageType === $(this).attr("id")) {
+            return;
         }
-        //console.log(messageType);
+
+        messageType = $(this).attr("id");
+
+        if (messageType !== 'email') {
+            ckeditorRemoveAllToolbars();
+            if (messageType === 'sms') {
+                $("#addresses-label").text(SEND_SMSS);
+            } else {
+                $("#addresses-label").text(SEND_TO_VK);
+            }
+        } else {
+            ckeditorAddAllToolbars();
+            $("#addresses-label").text(SEND_EMAILS);
+        }
+
+        // language=JQuery-CSS
         $("#message-type-button-group > button").each(function (index, element) {
             if ($(element).hasClass(BUTTON_INFO_CLASS)) {
                 $(element).removeClass(BUTTON_INFO_CLASS);
                 $(element).addClass(BUTTON_SECONDARY_CLASS);
             }
         });
-        $(btnPressed).addClass(BUTTON_INFO_CLASS);
+        $(this).addClass(BUTTON_INFO_CLASS);
     });
 });
 
@@ -153,7 +165,7 @@ $(document).ready(function () {
 });
 
 //TODO Не срабатывает. Предназначен для установки текущей даты в стартовую и мин даты при открытии календаря
-$('#messageSendingTime').on('showCalendar.daterangepicker', function (ev, picker) {
+$("#messageSendingTime").on('show.daterangepicker', function (event, picker) {
     let minDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа)
     picker.minDate = minDate;
     picker.startDate = minDate;
