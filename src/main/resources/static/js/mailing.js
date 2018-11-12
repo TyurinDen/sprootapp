@@ -11,42 +11,9 @@ const SEND_TO_VK = "Enter VK ids here:";
 
 var messageType = 'email';
 
-let text;
+//let text;
 
-function ChangeMessageType() {
-    console.warn("Button pressed!");
-    $('.btn-group-primary .btn').addClass('btn-primary');
-    // var selected = $('#socNetworkChoose').val();
-    // if (selected === 'email') {
-    //     type = 'email';
-    //     $('#field').show();
-    //     $('#vkArea').hide();
-    //     $('#smsArea').hide();
-    // } else if (selected === 'vk') {
-    //     type = 'vk';
-    //     $('#field').hide();
-    //     $('#vkArea').show();
-    //     $('#smsArea').hide();
-    //     text = document.getElementById("vkArea1");
-    // }
-    // else if (selected === 'sms') {
-    //     type = 'sms';
-    //     $('#field').hide();
-    //     $('#vkArea').hide();
-    //     $('#smsArea').show();
-    //     text = document.getElementById("smsArea1");
-    // }
-}
-
-//блок для редактора CKEditor
-$(document).ready(function () {
-    CKEDITOR.addCss('.cke_editable p { margin: 0 !important; }');
-    CKEDITOR.replace(EDITOR, {
-        customConfig: '/ckeditor/add-all-toolbars.js'
-    });
-});
-
-function mail(sendnow) {
+function sendMessages(sendnow) {
     console.warn(sendnow);
     let date = $('#messageSendingTime').val();
     console.warn(date);
@@ -81,20 +48,6 @@ function mail(sendnow) {
     });
 }
 
-function ckeditorRemoveAllToolbars() {
-    CKEDITOR.instances[EDITOR].destroy(true);
-    CKEDITOR.replace(EDITOR, {
-        customConfig: '/ckeditor/remove-all-toolbars.js'
-    });
-}
-
-function ckeditorAddAllToolbars() {
-    CKEDITOR.instances[EDITOR].destroy(true);
-    CKEDITOR.replace(EDITOR, {
-        customConfig: '/ckeditor/add-all-toolbars.js'
-    });
-}
-
 /**
  * Функция, переключающая состояние кнопок режима рассылки и перенастраивающая интерфейс редактора.
  * Для функции отправки сообщений посредством СМС, в CKEditor отключаются все плагины форматирования
@@ -120,7 +73,6 @@ $(document).ready(function () {
             $("#addresses-label").text(SEND_EMAILS);
         }
 
-        // language=JQuery-CSS
         $("#message-type-button-group > button").each(function (index, element) {
             if ($(element).hasClass(BUTTON_INFO_CLASS)) {
                 $(element).removeClass(BUTTON_INFO_CLASS);
@@ -171,6 +123,9 @@ $("#messageSendingTime").on('show.daterangepicker', function (event, picker) {
     picker.startDate = minDate;
 });
 
+/**
+ * Заполнение блока адресов
+ */
 $(document).ready(function () {
     $("#addresses-area").on("drop", function (event) {
         event.preventDefault();
@@ -178,8 +133,7 @@ $(document).ready(function () {
         $("#addresses-area").removeClass("drop-zone-is-dragover");
         let reader = new FileReader();
         let file = event.originalEvent.dataTransfer.files[0];
-        //console.warn(file.name + " " + file.size);
-        $("#file-info").text("Файл: " + file.name + ", Размер файла: " + file.size);
+        $("#file-info").text("Файл: " + file.name + ", Размер файла: " + file.size + " б");
         reader.onload = function (event) {
             let content = event.target.result;
             $("#addresses-area").val(content.toLowerCase());
@@ -196,6 +150,33 @@ $(document).ready(function () {
     })
 });
 
+/**
+ * Начальная настройка CKEditor
+ */
+$(document).ready(function () {
+    CKEDITOR.addCss('.cke_editable p { margin: 0 !important; }');
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/add-all-toolbars.js'
+    });
+});
+
+function ckeditorAddAllToolbars() {
+    CKEDITOR.instances[EDITOR].destroy(true);
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/add-all-toolbars.js'
+    });
+}
+
+function ckeditorRemoveAllToolbars() {
+    CKEDITOR.instances[EDITOR].destroy(true);
+    CKEDITOR.replace(EDITOR, {
+        customConfig: '/ckeditor/remove-all-toolbars.js'
+    });
+}
+
+/**
+ * Визуализация событий dragover, dragleave, dragend, drop поля адресов
+ */
 $(document).ready(function () {
     $("#addresses-area")
         .on("dragover", function (event) {
